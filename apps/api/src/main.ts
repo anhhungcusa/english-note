@@ -17,5 +17,7 @@ async function bootstrap() {
     Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix);
   });
 }
+bootstrap().catch(error => {
+  console.log(error);
+});
 
-bootstrap();
