@@ -4,6 +4,22 @@
     "defaultCollection": "@nrwl/nest"
   },
   "defaultProject": "api",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    }
+  },
   "projects": {
     "api": {
       "root": "apps/api",
@@ -52,6 +68,106 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "remind-extension": {
+      "root": "apps/remind-extension",
+      "sourceRoot": "apps/remind-extension/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/remind-extension",
+            "index": "apps/remind-extension/src/index.html",
+            "main": "apps/remind-extension/src/main.tsx",
+            "polyfills": "apps/remind-extension/src/polyfills.ts",
+            "tsConfig": "apps/remind-extension/tsconfig.app.json",
+            "assets": [
+              "apps/remind-extension/src/favicon.ico",
+              "apps/remind-extension/src/assets"
+            ],
+            "styles": ["apps/remind-extension/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/remind-extension/src/environments/environment.ts",
+                  "with": "apps/remind-extension/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "remind-extension:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "remind-extension:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/remind-extension/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/remind-extension"],
+          "options": {
+            "jestConfig": "apps/remind-extension/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "remind-extension-e2e": {
+      "root": "apps/remind-extension-e2e",
+      "sourceRoot": "apps/remind-extension-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/remind-extension-e2e/cypress.json",
+            "tsConfig": "apps/remind-extension-e2e/tsconfig.e2e.json",
+            "devServerTarget": "remind-extension:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "remind-extension:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/remind-extension-e2e/**/*.{js,ts}"]
           }
         }
       }

@@ -11,19 +11,14 @@
     "nx.json": "*"
   },
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "npmScope": "english-note",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "MTIwMDgwMjItNTBjYi00ZDA1LTliMzQtZmMzOGM1ZDVlMWI2fHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
@@ -33,6 +28,13 @@
   "projects": {
     "api": {
       "tags": []
+    },
+    "remind-extension": {
+      "tags": []
+    },
+    "remind-extension-e2e": {
+      "tags": [],
+      "implicitDependencies": ["remind-extension"]
     }
   }
 }
